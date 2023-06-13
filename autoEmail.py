@@ -73,7 +73,7 @@ def email():
             if tipoConexao == 'SSL':
                 while True:
                     dataHoraAgora = datetime.datetime.now()
-                    if dataHoraAgora >= dataHoraAgora:
+                    if dataHoraAgora >= dataHoraEnviar:
                         context = ssl.create_default_context()
                         with smtplib.SMTP_SSL(provedorSmtp, portaSmtp, context=context) as smtp:
                             smtp.login(emailRemetente, senhaRemetente)
