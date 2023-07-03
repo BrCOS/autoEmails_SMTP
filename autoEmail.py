@@ -28,7 +28,7 @@ def email():
     if ano < 100:
         ano += 2000
 
-    dataHoraEnviar = datetime.datetime(ano, mes, dia, hora, minutos)  #data padrao americano
+    dataHoraEnviar = datetime.datetime(ano, mes, dia, hora, minutos) #data padrao americano
 
     email = EmailMessage()
     email['From'] = emailsDestinatariosLista
