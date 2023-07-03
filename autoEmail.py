@@ -4,17 +4,23 @@ import smtplib
 import datetime
 import time
 
-
 def email():
     emailRemetente = input('Digite o e-mail do remetente: ')
     senhaRemetente = input('Digite a senha do e-mail do remetente: ')
-    emailDestinatario = input('Digite o email de destinatário: ')
+    emailsDestinatarios = input('Digite o/s e-mail/s do destinatário/s (separe-os por vírgula): ')
 
     assunto = input('Digite o assunto do E-mail: ')
     corpoEmail = input('Digite a mensagem a ser enviada: ')
 
     dataEnviar = input('Digite a data para enviar o e-mail DD/MM/ANO: ')
     horaEnviar = input('Digite a hora para enviar o e-mail HH:MM: ')
+
+    emailDestinatario = emailsDestinatarios.split(',')
+    emailsDestinatariosLista = []
+
+    for emails in emailDestinatario:
+        emails = emails.lstrip()
+        emailsDestinatariosLista.append(emails)
 
     dia, mes, ano = map(int, dataEnviar.split('/'))
     hora, minutos = map(int, horaEnviar.split(':'))
@@ -25,7 +31,7 @@ def email():
     dataHoraEnviar = datetime.datetime(ano, mes, dia, hora, minutos)  #data padrao americano
 
     email = EmailMessage()
-    email['From'] = emailRemetente
+    email['From'] = emailsDestinatariosLista
     email['To'] = emailDestinatario
     email['Subject'] = assunto
     email.set_content(corpoEmail)
@@ -41,7 +47,7 @@ def email():
                     smtp.login(emailRemetente, senhaRemetente)
                     smtp.sendmail(emailRemetente, emailDestinatario, email.as_string())
                     smtp.quit()
-                print(f'E-mail enviado com sucesso para o Destinatário: {emailDestinatario}')
+                print(f'E-mail enviado com sucesso para o/s Destinatário/s: {emailDestinatario}')
                 break
             else:
                 print('Ainda não está na hora.')
@@ -57,7 +63,7 @@ def email():
                     smtp.login(emailRemetente, senhaRemetente)
                     smtp.sendmail(emailRemetente, emailDestinatario, email.as_string())
                     smtp.quit()
-                print(f'E-mail enviado com sucesso para o Destinatário: {emailDestinatario}')
+                print(f'E-mail enviado com sucesso para o/s Destinatário/s: {emailDestinatario}')
                 break
             else:
                 print('Ainda não está na hora.')
@@ -79,7 +85,7 @@ def email():
                             smtp.login(emailRemetente, senhaRemetente)
                             smtp.sendmail(emailRemetente, emailDestinatario, email.as_string())
                             smtp.quit()
-                        print(f'E-mail enviado com sucesso para o Destinatário: {emailDestinatario}')
+                        print(f'E-mail enviado com sucesso para o/s Destinatário/s: {emailDestinatario}')
                         break
                     else:
                         print('Ainda não está na hora.')
@@ -95,7 +101,7 @@ def email():
                             smtp.login(emailRemetente, senhaRemetente)
                             smtp.sendmail(emailRemetente, emailDestinatario, email.as_string())
                             smtp.quit()
-                        print(f'E-mail enviado com sucesso para o Destinatário: {emailDestinatario}')
+                        print(f'E-mail enviado com sucesso para o/s Destinatário/s: {emailDestinatario}')
                         break
                     else:
                         print('Ainda não está na hora.')
